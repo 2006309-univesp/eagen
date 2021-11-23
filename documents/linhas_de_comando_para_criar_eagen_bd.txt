@@ -1,0 +1,174 @@
+TABLE produto {
+id int [pk]
+linha varchar
+nome varchar
+marca varchar
+precocompra float
+precovenda float
+quantidade int
+formapagamento_id int
+}
+
+TABLE servico {
+id int [pk]
+nome varchar
+preconormal float
+precopromocao float
+percsalao float
+percprof float 
+salao_id int
+descricao varchar(255)
+duracao int
+valor decimal(17,2)
+deletado boolean
+formapagamento_id int
+}
+
+TABLE cliente {
+id int[pk]
+nome varchar
+datanascimento date
+endereco varchar
+bairro varchar
+cidade varchar
+cep varchar
+datacriacao date
+telefone varchar
+celular varchar
+email varchar
+}
+
+TABLE tipoprofissional {
+id int [pk]
+nome varchar
+}
+
+Ref: cliente.id < cliente_salao.cliente_id
+
+TABLE profissional {
+id int[pk]
+nome varchar
+apelido varchar(255)
+endereco varchar
+cidade varchar
+nascimento date
+admissao date 
+tipoprofissional int
+telefone varchar
+celular varchar
+bairro varchar
+cep varchar
+deletado boolean
+salao_id int
+acesso_id int
+}
+
+TABLE formapagamento {
+id int[pk]
+nome varchar
+}
+
+table agenda {
+  id int[pk]
+  salao_id int
+  cliente_id int
+  servico_id int
+  profissional_id int
+  status_agendamento_id int
+  inicio datetime
+  fim datetime
+  observacao text
+}
+
+table status_agendamento {
+id int [pk]
+descricao varchar(255)
+}
+
+table cliente_salao {
+  salao_id int [pk]
+  cliente_id int
+  email varchar(255)
+}
+
+table salao {
+  id int [pk]
+  nome varchar(255)
+  visivel_no_app boolean
+  telefone varchar
+  celular varchar
+  endereco_id int
+}
+
+Ref: salao.id - cliente_salao.salao_id
+Ref: salao.id < agenda.salao_id
+Ref: cliente.id < agenda.cliente_id
+
+table cliente_app {
+cliente_id int 
+acesso_id int
+}
+
+table acesso {
+  id int [pk]
+  email varchar(255)
+  senha varchar(255)
+  perfil varchar(255)
+}
+
+table favorito {
+  salao_id int
+  cliente_id int
+  acesso_id int
+  }
+  
+table horario_funcionamento {
+  id int [pk]
+  salao_id int
+  hora_inicio time
+  hora_fim time
+  segunda bool
+  terca bool
+  quarta bool
+  quinta bool
+  sexta bool
+  sabado bool
+  domingo bool
+}
+
+table horario_trabalho {
+  dia_da_semana int [pk]
+  salao_id int
+  profissional_id int
+  entrada1 time
+  saida1 time
+  entrada2 time
+  saida2 time
+}
+
+table profissional_presta_servico {
+  servico_id int
+  profissional_id int
+  salao_id int
+}
+
+Ref: cliente.id < cliente_app.cliente_id
+
+Ref: salao.id < favorito.salao_id
+Ref: salao.id < horario_funcionamento.salao_id
+Ref: salao.id < profissional.salao_id
+Ref: salao.id < servico.salao_id
+
+Ref: servico.id < profissional_presta_servico.servico_id
+Ref: servico.id < agenda.servico_id
+Ref: status_agendamento.id < agenda.status_agendamento_id
+Ref: profissional.id < agenda.profissional_id
+Ref: profissional.id < profissional_presta_servico.profissional_id
+Ref: profissional.id < horario_trabalho.profissional_id
+Ref: acesso.id > profissional.acesso_id
+Ref: formapagamento.id < produto.formapagamento_id
+Ref: formapagamento.id < servico.formapagamento_id
+
+relacionamento " - " um para um
+ " > " muitos para um
+" < " um para muitos 
