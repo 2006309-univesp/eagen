@@ -19,7 +19,9 @@
     - 1º cd mobile
     - 2º cd eagen
     - 3º npm install ou yarn install
-    - 4º npm run android ou yarn android
+    - 4º npm run android ou yarn android (para gerar um .APK Release, utilize o build.gradle correto que fica dentro do diretório ../android\app use o comando ./gradlew assembleRelease no prompt de comando)
+    
+    
 
 ### Padronização de commit's:
     - https://github.com/kevinnchristian/padrao-de-git-commit
