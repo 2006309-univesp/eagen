@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
+import elChapo from '../assets/el_chapo.jpg';
 
 import Stars from '../components/Stars';
 
@@ -57,9 +58,9 @@ export default ({data}) => {
 
     return (
         <Area onPress={handleClick}>
-            <Avatar source={{uri: data.avatar}} />
-            <InfoArea>
-                <UserName>{data.name}</UserName>
+            <Avatar source={elChapo} />
+                        <InfoArea>
+                <UserName>El Chapo</UserName>
 
                 <Stars stars={data.stars} showNumber={true} />
 

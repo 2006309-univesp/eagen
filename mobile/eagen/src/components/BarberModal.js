@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-
+import elChapo from '../assets/el_chapo.jpg';
 import Api from '../Api';
 
 import ExpandIcon from '../assets/expand.svg';
@@ -292,8 +292,8 @@ export default ({ show, setShow, user, service }) => {
 
                     <ModalItem>
                         <UserInfo>
-                            <UserAvatar source={{uri: user.avatar}} />
-                            <UserName>{user.name}</UserName>
+                            <UserAvatar source={elChapo} />
+                            <UserName>El Chapo</UserName>
                         </UserInfo>
                     </ModalItem>
 

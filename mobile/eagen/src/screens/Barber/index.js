@@ -11,7 +11,7 @@ import FavoriteIcon from '../../assets/favorite.svg';
 import BackIcon from '../../assets/back.svg';
 import NavPrevIcon from '../../assets/nav_prev.svg';
 import NavNextIcon from '../../assets/nav_next.svg';
-
+import elChapo from '../../assets/el_chapo_completo.jpeg';
 import {
     Container,
     Scroller,
@@ -117,9 +117,9 @@ export default () => {
                 }
                 <PageBody>
                     <UserInfoArea>
-                        <UserAvatar source={{uri:userInfo.avatar}} />
+                        <UserAvatar source={elChapo} />
                         <UserInfo>
-                            <UserInfoName>{userInfo.name}</UserInfoName>
+                            <UserInfoName>El Chapo</UserInfoName>
                             <Stars stars={userInfo.stars} showNumber={true} />
                         </UserInfo>
                         <UserFavButton onPress={handleFavClick}>

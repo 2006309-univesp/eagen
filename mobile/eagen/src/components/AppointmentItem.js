@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
+import elChapo from '../assets/el_chapo.jpg';
 const Area = styled.View`
     background-color: #FFFFFF;
     padding: 15px;
@@ -62,8 +62,8 @@ export default ({data}) => {
     return (
         <Area>
             <UserArea>
-                <Avatar source={{uri: data.barber.avatar}} />
-                <UserName>{data.barber.name}</UserName>
+                <Avatar source={elChapo} />
+                <UserName>El Chapo</UserName>
             </UserArea>
 
             <SplitArea>
