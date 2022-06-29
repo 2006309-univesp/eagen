@@ -1,78 +1,78 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+
+// Translate
+import {t} from '../../i18n';
+
 import {
-    Container,
-    SearchArea,
-    SearchInput,
-    Scroller,
-    LoadingIcon,
-    ListArea,
-    EmptyWarning
+  Container,
+  SearchArea,
+  SearchInput,
+  Scroller,
+  LoadingIcon,
+  ListArea,
+  EmptyWarning,
 } from './styles';
 
 import BarberItem from '../../components/BarberItem';
 import Api from '../../Api';
 
 export default () => {
+  const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [emptyList, setEmptyList] = useState(false);
+  const [list, setList] = useState([]);
 
-    const [searchText, setSearchText] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [emptyList, setEmptyList] = useState(false);
-    const [list, setList] = useState([]);
+  const searchBarbers = async () => {
+    setEmptyList(false);
+    setLoading(true);
+    setList([]);
 
-    const searchBarbers = async () => {
-        setEmptyList(false);
-        setLoading(true);
-        setList([]);
-
-        if(searchText != '') {
-            let res = await Api.search(searchText);
-            if(res.error == '') {
-                if(res.list.length > 0) {
-                    setList(res.list);
-                } else {
-                    setEmptyList(true);
-                }
-            } else {
-                alert("Erro: "+res.error);
-            }
+    if (searchText != '') {
+      let res = await Api.search(searchText);
+      if (res.error == '') {
+        if (res.list.length > 0) {
+          setList(res.list);
+        } else {
+          setEmptyList(true);
         }
-
-        setLoading(false);
+      } else {
+        alert('Erro: ' + res.error);
+      }
     }
 
-    return (
-        <Container>
-            
-            <SearchArea>
-                <SearchInput
-                    placeholder="Digite o nome do barbeiro"
-                    placeholderTextColor="#FFFFFF"
-                    value={searchText}
-                    onChangeText={t=>setSearchText(t)}
-                    onEndEditing={searchBarbers}
-                    returnKeyType="search"
-                    autoFocus
-                    selectTextOnFocus
-                />
-            </SearchArea>
+    setLoading(false);
+  };
 
-            <Scroller>
-                {loading &&
-                    <LoadingIcon size="large" color="#000000" />
-                }
+  return (
+    <Container>
+      <SearchArea>
+        <SearchInput
+          placeholder={t('enter_name_barber')}
+          placeholderTextColor="#FFFFFF"
+          value={searchText}
+          onChangeText={t => setSearchText(t)}
+          onEndEditing={searchBarbers}
+          returnKeyType="search"
+          autoFocus
+          selectTextOnFocus
+        />
+      </SearchArea>
 
-                {emptyList &&
-                    <EmptyWarning>Não achamos barbeiros com o nome "{searchText}"</EmptyWarning>
-                }
+      <Scroller>
+        {loading && <LoadingIcon size="large" color="#000000" />}
 
-                <ListArea>
-                    {list.map((item, k)=>(
-                        <BarberItem key={k} data={item} />
-                    ))}
-                </ListArea>
+        {emptyList && (
+          <EmptyWarning>
+            {t('didnt_find_barbers_name')} "{searchText}"
+          </EmptyWarning>
+        )}
 
-            </Scroller>
-
-        </Container>
-    );
-}
+        <ListArea>
+          {list.map((item, k) => (
+            <BarberItem key={k} data={item} />
+          ))}
+        </ListArea>
+      </Scroller>
+    </Container>
+  );
+};

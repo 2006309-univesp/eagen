@@ -1,5 +1,8 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+// Translate
+import {t} from '../i18n';
 
 import CustomTabBar from '../components/CustomTabBar';
 
@@ -12,11 +15,11 @@ import Profile from '../screens/Profile';
 const Tab = createBottomTabNavigator();
 
 export default () => (
-    <Tab.Navigator tabBar={props=><CustomTabBar {...props} />}>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Search" component={Search} />
-        <Tab.Screen name="Appointments" component={Appointments} />
-        <Tab.Screen name="Favorites" component={Favorites} />
-        <Tab.Screen name="Profile" component={Profile} />
-    </Tab.Navigator>
+  <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
+    <Tab.Screen name={t('home')} component={Home} />
+    <Tab.Screen name={t('search')} component={Search} />
+    <Tab.Screen name={t('appointments')} component={Appointments} />
+    <Tab.Screen name={t('favorites')} component={Favorites} />
+    <Tab.Screen name={t('profile')} component={Profile} />
+  </Tab.Navigator>
 );
